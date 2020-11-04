@@ -1,0 +1,8 @@
+@mixin formrow($name, $rownr, $elType: 'input') {
+  #{$elType}[name='#{$name}'] {
+    grid-row: $rownr;
+  }
+  label[for='#{$name}'] {
+    grid-row: $rownr;
+  }
+}

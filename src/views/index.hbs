@@ -1,0 +1,43 @@
+<div id="task-overview">
+  <div id="todo-control" class="display-section">
+    <a class="link-button action{{#if isFinishedSorting}} active{{/if}} direction{{#if isDirectionDesc}}-desc{{/if}}{{#if isDirectionAsc}}-asc{{/if}}"
+      href="/tasks/sort/finished/{{invertedDirection}}/">Nach Erledigt-Datum</a>
+    <a class="link-button action{{#if isCreationSorting}} active{{/if}} direction{{#if isDirectionDesc}}-desc{{/if}}{{#if isDirectionAsc}}-asc{{/if}}"
+      href="/tasks/sort/creation/{{invertedDirection}}/">Nach Erstellungsdatum</a>
+    <a class="link-button action{{#if isImportanceSorting}} active{{/if}} direction{{#if isDirectionDesc}}-desc{{/if}}{{#if isDirectionAsc}}-asc{{/if}}"
+      href="/tasks/sort/importance/{{invertedDirection}}/">Nach Priorität</a>
+    <a class="link-button action link-button-toggle{{#if showfinished}} active{{/if}}"
+      href="/tasks/toggle/showFinished_{{invertedshowfinished}}/">Erledigte
+      {{#if showfinished}}ausblenden{{/if}}{{#if invertedshowfinished}}einblenden{{/if}}</a>
+  </div>
+  <div id="create-new-row">
+    <a class="link-button create" href="/tasks/new">Neuen Task erstellen</a>
+  </div>
+  <div id="todo-list">
+    {{#if isListEmpty}}
+    <span id="list-empty-message">Es sind keine Tasks vorhanden</span>
+    {{else}}
+    {{#each todos}}
+    <div class="todo-item">
+      <div class="todo-finished-date-wrapper">
+        <span>{{displayFinishedByDate}}</span>
+        <span class="todo-finished-indicator {{#if finished}}checked{{/if}}"></span>
+      </div>
+      <div class="todo-content-wrapper">
+        <h3 class="todo-title">{{title}}</h3>
+        <div class="todo-importance">
+          {{#times importance}}
+          <span>🟌</span>
+          {{/times}}
+        </div>
+        <span class="task-description">{{description}}</span>
+      </div>
+      <div class="todo-edit-wrapper">
+        <a class="link-button edit" href="/tasks/{{_id}}">✎</a>
+      </div>
+    </div>
+    <br />
+    {{/each}}
+    {{/if}}
+  </div>
+</div>

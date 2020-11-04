@@ -1,0 +1,391 @@
+@import 'mixins';
+@import 'colors';
+
+body {
+  font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.page-grid {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 50px auto 25px;
+}
+
+header {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
+  position: fixed;
+  height: 50px;
+  width: 100%;
+  background: gray;
+  color: white;
+  top: 0;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 80% auto;
+
+  span {
+    font-size: 26px;
+    font-weight: bold;
+    margin-left: 50px;
+    align-self: center;
+    grid-column: 1;
+  }
+  a {
+    grid-column: 2;
+  }
+}
+
+footer {
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.23);
+  position: fixed;
+  height: 20px;
+  bottom: 0;
+  width: 100%;
+  background: gray;
+  color: white;
+  padding: 5px;
+
+  span {
+    margin-left: 50px;
+    align-self: center;
+  }
+}
+
+.page-content {
+  padding: 50px;
+  margin-top: 15px;
+}
+
+#task-overview {
+  display: grid;
+  grid-template-rows: auto auto auto;
+}
+
+#create-new-row {
+  grid-row: 2;
+}
+
+#toggle-theme {
+  width: 105px;
+  float: right;
+}
+
+#todo-control {
+  grid-row: 1;
+  align-content: center;
+  float: right;
+}
+
+#todo-list {
+  grid-row: 3;
+}
+
+#list-empty-message {
+  border-radius: 25px;
+  background-color: opacify($color: $warning, $amount: 0.4);
+  font-weight: bold;
+  width: 100%;
+  align-content: center;
+  text-align: center;
+  height: 50px;
+  display: block;
+  padding-top: 20px;
+}
+
+.todo-item {
+  padding: 15px;
+  display: grid;
+  background: #d3d3d321;
+  grid-template-columns: 150px auto 90px;
+  width: 100%;
+
+  .todo-finished-date-wrapper {
+    grid-column: 1;
+    align-self: center;
+    width: 150px;
+  }
+
+  .todo-finished-indicator {
+    grid-column: 1;
+    align-self: center;
+    font-size: 25px;
+
+    &::before {
+      content: '☐';
+      color: $warning;
+    }
+
+    &.checked::before {
+      content: '✓';
+      color: $success;
+    }
+  }
+
+  .todo-content-wrapper {
+    width: 100%;
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: auto 150px;
+    grid-template-rows: auto auto;
+
+    .task-description {
+      border-radius: 15px;
+      padding: 15px;
+      width: 100%;
+      min-height: 30px;
+      grid-row: 2;
+      box-shadow: inset 0 0 5px 0px rgba(95, 109, 109, 0.7);
+      cursor: text;
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+
+    .todo-title {
+      min-width: 50px;
+      grid-row: 1;
+      font-variant: small-caps;
+      grid-column: 1;
+    }
+
+    .todo-importance {
+      grid-column: 2;
+      font-size: 26px;
+    }
+  }
+
+  .todo-edit-wrapper {
+    grid-column: 3;
+    align-self: center;
+    padding-left: 15px;
+    height: 100%;
+  }
+}
+
+.action-button {
+  text-decoration: none;
+  color: #5a6268;
+  height: 45px;
+  width: 45px;
+  border-radius: 25px;
+  font-size: 26px;
+}
+
+.link-button {
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  background-color: white;
+  border-color: $active;
+  color: $active;
+
+  text-decoration: none;
+  margin: 5px;
+
+  &.action {
+    &:hover {
+      color: white;
+      background-color: $active;
+      border-color: $active;
+    }
+  }
+
+  &.active {
+    background: $active;
+    color: white;
+    font-weight: bold;
+
+    &:hover {
+      color: $hover;
+      background-color: $active;
+      border-color: $active;
+    }
+
+    &.direction-asc::before {
+      content: '⬆';
+      font-size: 16px;
+    }
+
+    &.direction-desc::before {
+      content: '⬇';
+      font-size: 16px;
+    }
+  }
+
+  &.create {
+    border-color: opacify($color: $create, $amount: 0.9);
+    color: opacify($color: $create, $amount: 0.9);
+
+    &:hover {
+      background-color: $create;
+      color: white;
+    }
+  }
+
+  &.edit {
+    border-color: transparent;
+    background-color: transparent;
+    color: opacify($color: $edit, $amount: 0.9);
+    &:hover {
+      background-color: opacify($color: $edit, $amount: 0.9);
+      border-color: $edit;
+    }
+  }
+
+  &.save {
+    border-color: opacify($color: $success, $amount: 0.9);
+    color: opacify($color: $success, $amount: 0.9);
+
+    &:hover {
+      background-color: $success;
+      color: white;
+      cursor: pointer;
+    }
+  }
+
+  &.cancel {
+    border-color: opacify($color: $warning, $amount: 0.9);
+    color: opacify($color: $warning, $amount: 0.9);
+    &:hover {
+      background-color: $warning;
+      color: white;
+    }
+  }
+}
+
+#edit-task-form {
+  margin-top: 15px;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: repeat(7);
+  row-gap: 15px;
+
+  @include formrow('title', 1);
+  @include formrow('importance', 2);
+  @include formrow('desc', 3, 'textarea');
+  @include formrow('finishedBy', 4);
+  @include formrow('finished', 5);
+
+  #button-save {
+    grid-row: 6;
+  }
+
+  #button-cancel {
+    grid-row: 7;
+  }
+}
+
+@media only screen and (max-width: 678px) {
+  header {
+    padding: 0;
+    width: 100%;
+    grid-template-columns: 60% auto;
+  }
+  .page-content {
+    margin-top: 60px;
+    padding: 0;
+  }
+  .todo-item {
+    margin: 0;
+    padding: 0;
+
+    .todo-finished-date-wrapper {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    .todo-content-wrapper {
+      margin-left: 15px;
+      margin-right: 15px;
+      display: grid;
+      grid-template-rows: auto auto auto;
+      grid-template-columns: auto;
+
+      .task-description {
+        grid-row: 3;
+        grid-column-start: 1;
+        grid-column-end: 1;
+      }
+
+      .todo-title {
+        grid-row: 1;
+      }
+
+      .todo-importance {
+        grid-row: 2;
+        grid-column: 1;
+      }
+    }
+    .todo-edit-wrapper {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+  }
+}
+
+.darkmode {
+  color: lightgray;
+  background-color: black;
+
+  .link-button {
+    background-color: $active;
+    border-color: white;
+    color: #fff;
+
+    &.active {
+      background: lightgray;
+      color: $active;
+    }
+
+    &.create {
+      background-color: opacify($color: $create, $amount: 0.9);
+
+      &:hover {
+        background-color: $create;
+        border-color: $create;
+      }
+    }
+
+    &.edit {
+      background-color: transparent;
+      color: opacify($color: $edit, $amount: 0.9);
+      &:hover {
+        background-color: opacify($color: $edit, $amount: 0.9);
+        border-color: $edit;
+      }
+    }
+
+    &.save {
+      background-color: opacify($color: $success, $amount: 0.9);
+
+      &:hover {
+        background-color: $success;
+        border-color: $success;
+        cursor: pointer;
+      }
+    }
+
+    &.cancel {
+      background-color: opacify($color: $warning, $amount: 0.9);
+      &:hover {
+        background-color: $warning;
+        border-color: $warning;
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<form id="edit-task-form" action="/tasks/{{task._id}}" method="POST">
+  <label for="title">Titel*</label>
+  <input type="text" name="title" {{#if isDarkmode}}Helles design{{/if}} value="{{task.title}}">
+
+  <label for="importance">Priorität (1-5)*</label>
+  <input type="number" min="1" max="5" name="importance" required value="{{task.importance}}">
+
+  <label for="desc">Beschreibung</label>
+  <textarea name="desc" rows="4" cols="50">{{task.description}}</textarea>
+
+  <label for="finishedBy">Erledigen bis</label>
+  <input type="date" name="finishedBy" value="{{ftask.inishedBy}}">
+
+  <label for="finished">Erledigt?</label><br>
+  <input type="checkbox" name="finished" {{#if task.finished}}checked{{/if}}>
+
+  <input id="button-save" class="link-button save" type="submit" value="Speichern">
+  <a id="button-cancel" class="link-button cancel" href="/tasks/">Abbrechen</a>
+</form>

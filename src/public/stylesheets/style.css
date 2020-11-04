@@ -1,0 +1,302 @@
+@charset "UTF-8";
+body {
+  font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  display: block;
+  padding: 0;
+  margin: 0; }
+
+.page-grid {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 50px auto 25px; }
+
+header {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
+  position: fixed;
+  height: 50px;
+  width: 100%;
+  background: gray;
+  color: white;
+  top: 0;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 80% auto; }
+  header span {
+    font-size: 26px;
+    font-weight: bold;
+    margin-left: 50px;
+    align-self: center;
+    grid-column: 1; }
+  header a {
+    grid-column: 2; }
+
+footer {
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.23);
+  position: fixed;
+  height: 20px;
+  bottom: 0;
+  width: 100%;
+  background: gray;
+  color: white;
+  padding: 5px; }
+  footer span {
+    margin-left: 50px;
+    align-self: center; }
+
+.page-content {
+  padding: 50px;
+  margin-top: 15px; }
+
+#task-overview {
+  display: grid;
+  grid-template-rows: auto auto auto; }
+
+#create-new-row {
+  grid-row: 2; }
+
+#toggle-theme {
+  width: 105px;
+  float: right; }
+
+#todo-control {
+  grid-row: 1;
+  align-content: center;
+  float: right; }
+
+#todo-list {
+  grid-row: 3; }
+
+#list-empty-message {
+  border-radius: 25px;
+  background-color: firebrick;
+  font-weight: bold;
+  width: 100%;
+  align-content: center;
+  text-align: center;
+  height: 50px;
+  display: block;
+  padding-top: 20px; }
+
+.todo-item {
+  padding: 15px;
+  display: grid;
+  background: #d3d3d321;
+  grid-template-columns: 150px auto 90px;
+  width: 100%; }
+  .todo-item .todo-finished-date-wrapper {
+    grid-column: 1;
+    align-self: center;
+    width: 150px; }
+  .todo-item .todo-finished-indicator {
+    grid-column: 1;
+    align-self: center;
+    font-size: 25px; }
+    .todo-item .todo-finished-indicator::before {
+      content: '☐';
+      color: firebrick; }
+    .todo-item .todo-finished-indicator.checked::before {
+      content: '✓';
+      color: forestgreen; }
+  .todo-item .todo-content-wrapper {
+    width: 100%;
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: auto 150px;
+    grid-template-rows: auto auto; }
+    .todo-item .todo-content-wrapper .task-description {
+      border-radius: 15px;
+      padding: 15px;
+      width: 100%;
+      min-height: 30px;
+      grid-row: 2;
+      box-shadow: inset 0 0 5px 0px rgba(95, 109, 109, 0.7);
+      cursor: text;
+      grid-column-start: 1;
+      grid-column-end: 3; }
+    .todo-item .todo-content-wrapper .todo-title {
+      min-width: 50px;
+      grid-row: 1;
+      font-variant: small-caps;
+      grid-column: 1; }
+    .todo-item .todo-content-wrapper .todo-importance {
+      grid-column: 2;
+      font-size: 26px; }
+  .todo-item .todo-edit-wrapper {
+    grid-column: 3;
+    align-self: center;
+    padding-left: 15px;
+    height: 100%; }
+
+.action-button {
+  text-decoration: none;
+  color: #5a6268;
+  height: 45px;
+  width: 45px;
+  border-radius: 25px;
+  font-size: 26px; }
+
+.link-button {
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  background-color: white;
+  border-color: #515a5a;
+  color: #515a5a;
+  text-decoration: none;
+  margin: 5px; }
+  .link-button.action:hover {
+    color: white;
+    background-color: #515a5a;
+    border-color: #515a5a; }
+  .link-button.active {
+    background: #515a5a;
+    color: white;
+    font-weight: bold; }
+    .link-button.active:hover {
+      color: #212529;
+      background-color: #515a5a;
+      border-color: #515a5a; }
+    .link-button.active.direction-asc::before {
+      content: '⬆';
+      font-size: 16px; }
+    .link-button.active.direction-desc::before {
+      content: '⬇';
+      font-size: 16px; }
+  .link-button.create {
+    border-color: #3b6b94;
+    color: #3b6b94; }
+    .link-button.create:hover {
+      background-color: #3b6b94;
+      color: white; }
+  .link-button.edit {
+    border-color: transparent;
+    background-color: transparent;
+    color: #d39e00; }
+    .link-button.edit:hover {
+      background-color: #d39e00;
+      border-color: #d39e00; }
+  .link-button.save {
+    border-color: forestgreen;
+    color: forestgreen; }
+    .link-button.save:hover {
+      background-color: forestgreen;
+      color: white;
+      cursor: pointer; }
+  .link-button.cancel {
+    border-color: firebrick;
+    color: firebrick; }
+    .link-button.cancel:hover {
+      background-color: firebrick;
+      color: white; }
+
+#edit-task-form {
+  margin-top: 15px;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: repeat(7);
+  row-gap: 15px; }
+  #edit-task-form input[name='title'] {
+    grid-row: 1; }
+  #edit-task-form label[for='title'] {
+    grid-row: 1; }
+  #edit-task-form input[name='importance'] {
+    grid-row: 2; }
+  #edit-task-form label[for='importance'] {
+    grid-row: 2; }
+  #edit-task-form textarea[name='desc'] {
+    grid-row: 3; }
+  #edit-task-form label[for='desc'] {
+    grid-row: 3; }
+  #edit-task-form input[name='finishedBy'] {
+    grid-row: 4; }
+  #edit-task-form label[for='finishedBy'] {
+    grid-row: 4; }
+  #edit-task-form input[name='finished'] {
+    grid-row: 5; }
+  #edit-task-form label[for='finished'] {
+    grid-row: 5; }
+  #edit-task-form #button-save {
+    grid-row: 6; }
+  #edit-task-form #button-cancel {
+    grid-row: 7; }
+
+@media only screen and (max-width: 678px) {
+  header {
+    padding: 0;
+    width: 100%;
+    grid-template-columns: 60% auto; }
+  .page-content {
+    margin-top: 60px;
+    padding: 0; }
+  .todo-item {
+    margin: 0;
+    padding: 0; }
+    .todo-item .todo-finished-date-wrapper {
+      margin-left: 15px;
+      margin-right: 15px; }
+    .todo-item .todo-content-wrapper {
+      margin-left: 15px;
+      margin-right: 15px;
+      display: grid;
+      grid-template-rows: auto auto auto;
+      grid-template-columns: auto; }
+      .todo-item .todo-content-wrapper .task-description {
+        grid-row: 3;
+        grid-column-start: 1;
+        grid-column-end: 1; }
+      .todo-item .todo-content-wrapper .todo-title {
+        grid-row: 1; }
+      .todo-item .todo-content-wrapper .todo-importance {
+        grid-row: 2;
+        grid-column: 1; }
+    .todo-item .todo-edit-wrapper {
+      margin-left: 15px;
+      margin-right: 15px; } }
+
+.darkmode {
+  color: lightgray;
+  background-color: black; }
+  .darkmode .link-button {
+    background-color: #515a5a;
+    border-color: white;
+    color: #fff; }
+    .darkmode .link-button.active {
+      background: lightgray;
+      color: #515a5a; }
+    .darkmode .link-button.create {
+      background-color: #3b6b94; }
+      .darkmode .link-button.create:hover {
+        background-color: #3b6b94;
+        border-color: #3b6b94; }
+    .darkmode .link-button.edit {
+      background-color: transparent;
+      color: #d39e00; }
+      .darkmode .link-button.edit:hover {
+        background-color: #d39e00;
+        border-color: #d39e00; }
+    .darkmode .link-button.save {
+      background-color: forestgreen; }
+      .darkmode .link-button.save:hover {
+        background-color: forestgreen;
+        border-color: forestgreen;
+        cursor: pointer; }
+    .darkmode .link-button.cancel {
+      background-color: firebrick; }
+      .darkmode .link-button.cancel:hover {
+        background-color: firebrick;
+        border-color: firebrick; }
+
+/*# sourceMappingURL=style.css.map */
